@@ -21,10 +21,11 @@ tokenizer, model = load_model()
 
 st_model_load.text("")
 
-st.markdown('Questa è una piccola app fatta utilizzando una versione [italiana del modello T5](https://huggingface.co/gsarti/it5-small) al quale è stato fatto un fine-tuning su tutta la [*Divina Commedia*](https://it.wikipedia.org/wiki/Divina_Commedia) e le rispettive parafrasi in italiano moderno.')
+st.markdown('Questa è una piccola app fatta utilizzando un [modello T5 italiano](https://huggingface.co/gsarti/it5-small) al quale è stato fatto un fine-tuning su tutta la [*Divina Commedia*](https://it.wikipedia.org/wiki/Divina_Commedia) e le rispettive parafrasi in italiano moderno.')
 st.markdown("Con questa app puoi divertirti a convertire lo stile delle tue frasi dall'italiano moderno a quello dantesco!")
-st.markdown('I risultati possono essere anche molto lontani dalla perfezione, ma puoi giocare con le  *Impostazioni* per provare ad ottenere risultati migliori.')
+st.markdown('I risultati possono essere anche molto lontani dalla perfezione, ma puoi giocare con le  *Impostazioni* per provare ad ottenerne di migliori.')
 st.markdown('La repository del progetto è disponibile [qui](https://github.com/leobertolazzi/danteIT5).')
+st.markdown("P.s. se non sai cosa scrivere prova con il testo di una canzone")
 
 with st.sidebar:
     st.header("Impostazioni")
