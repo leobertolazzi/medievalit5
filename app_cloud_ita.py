@@ -25,7 +25,7 @@ st.markdown('Questa è una piccola app fatta utilizzando un [modello T5 italiano
 st.markdown("Con questa app puoi divertirti a convertire lo stile delle tue frasi dall'italiano moderno a quello dantesco!")
 st.markdown('I risultati possono essere anche molto lontani dalla perfezione, ma puoi giocare con le  *Impostazioni* per provare ad ottenerne di migliori.')
 st.markdown('La repository del progetto è disponibile [qui](https://github.com/leobertolazzi/danteIT5).')
-st.markdown("P.s. se non sai cosa scrivere prova con il testo di una canzone")
+st.markdown("P.s. se non sai cosa scrivere prova con il testo di una canzone.")
 
 with st.sidebar:
     st.header("Impostazioni")
