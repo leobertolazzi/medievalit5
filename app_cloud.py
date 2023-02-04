@@ -1,4 +1,3 @@
-import os
 import nltk
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import streamlit as st
