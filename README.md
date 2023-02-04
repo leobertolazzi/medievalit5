@@ -41,11 +41,11 @@ An new folder called `model` will be created with the best model checkpoint in i
 ## Run the app locally
 After the fine-tuning, if you want to test the model through the app, run:
 ```
-$ streamlit run app.py
+$ streamlit run app_local.py
 ```
 
 ## Cloud app
-If you only want to try the model without fine-tuning it from scratch, you can browse to the cloud app [here]().
+If you only want to try the model without fine-tuning it from scratch, you can browse to the cloud app [here](). The cloud app uses an already fine-tuned model on the [Hugging Face Hub](https://huggingface.co/leobertolazzi/it5-small-dante).
 
 ## Limitations
 The biggest limitation for this project is the size of the ita2dante dataset. In fact, it consists only of 6K sentences whereas [gsarti/it5-small](https://huggingface.co/gsarti/it5-small) has more than 70M parameters.
