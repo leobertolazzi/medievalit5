@@ -1,6 +1,6 @@
-nltk==3.7
-pandas==1.5.2
-pytorch==1.13.1
-scikit-learn==1.0.2
-streamlit==1.17.0
-transformers==4.26.0
+nltk
+pandas
+pytorch
+scikit-learn
+streamlit
+transformers
