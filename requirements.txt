@@ -1,6 +1,5 @@
 nltk
 pandas
-pytorch
 scikit-learn
 streamlit
 transformers
