@@ -24,7 +24,7 @@ st_model_load.text("")
 st.markdown('This is a small app made with an [italian T5 model](https://huggingface.co/gsarti/it5-small) fine-tuned on the whole [*Divine Comedy*](https://en.wikipedia.org/wiki/Divine_Comedy) and its paraphrases in modern italian.')
 st.markdown('You can have fun converting the style of your italian text to the one of Dante!')
 st.markdown('The results may be far from perfect, but you can play with the *Generation settings* and try to obtain better results.')
-st.markdown('All code is open sourced and [here]() you can find the project repo.')
+st.markdown('All code is open sourced and [here](https://github.com/leobertolazzi/danteIT5) you can find the project repo.')
 
 with st.sidebar:
     st.header("Generation settings")
@@ -72,7 +72,6 @@ def transfer_style():
         predicted_dante = [nltk.sent_tokenize(decoded_output.strip())[0] for decoded_output in decoded_outputs]
     else:
         predicted_dante = []
-        #raise Exception('Beams and Top-p are both set on non-zero values.')
 
     st.session_state.dante = predicted_dante
 
