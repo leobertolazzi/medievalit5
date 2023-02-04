@@ -2,7 +2,7 @@
 
 Text Style Transfer (TST) is a task in which the *source style* of a text is changed to a chosen *target style*. The task aims to change the style of a given sentence while preserving its semantics.
 
-Here I show how to fine-tune [gsarti/it5-small](https://huggingface.co/gsarti/it5-small) to perform TST from modern italian to dantean italian using a custom dataset called **ita2dante**.
+Here I show how to fine-tune an [italian T5 model](https://huggingface.co/gsarti/it5-small) to perform TST from modern italian to dantean italian using a custom dataset called **ita2dante**.
 
 The fine-tuned model can be tested using an [online app](https://leobertolazzi-danteit5-app-cloud-2k7fov.streamlit.app/) made with [Streamlit](https://streamlit.io/).
 
