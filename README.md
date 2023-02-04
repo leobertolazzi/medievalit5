@@ -45,7 +45,7 @@ $ streamlit run app_local.py
 ```
 
 ## Cloud app
-If you only want to try the model without fine-tuning it from scratch, you can browse to the cloud app [here](https://leobertolazzi-danteit5-app-cloud-eng-8upuiq.streamlit.app/). The cloud app uses an already fine-tuned model on the [Hugging Face Hub](https://huggingface.co/leobertolazzi/it5-small-dante).
+If you only want to try the model without fine-tuning it from scratch, you can browse to the cloud app [here (eng)](https://leobertolazzi-danteit5-app-cloud-eng-8upuiq.streamlit.app/) and [here (ita)](https://leobertolazzi-danteit5-app-cloud-ita-c2olq1.streamlit.app/). The cloud apps use an already fine-tuned model on the [Hugging Face Hub](https://huggingface.co/leobertolazzi/it5-small-dante).
 
 ## Limitations
 The biggest limitation for this project is the size of the ita2dante dataset. In fact, it consists only of 6K sentences whereas [gsarti/it5-small](https://huggingface.co/gsarti/it5-small) has more than 70M parameters.
