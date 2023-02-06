@@ -64,7 +64,7 @@ def transfer_style():
 
     # compute predictions based on generation setting selected
     if beams != 0 and top_p == 0.:
-        outputs = model.generate(**inputs, max_length=128, do_sample=False, num_beams=beams)
+        outputs = model.generate(**inputs, max_length=128, do_sample=False, num_beams=beams, no_repeat_ngram_size=3)
         decoded_outputs = tokenizer.batch_decode(outputs, skip_special_tokens=True)
         predicted_dante = [nltk.sent_tokenize(decoded_output.strip())[0] for decoded_output in decoded_outputs]
     elif top_p != 0. and beams == 0:
