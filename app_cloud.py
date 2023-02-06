@@ -2,9 +2,9 @@ import nltk
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import streamlit as st
 
-model_name="leobertolazzi/it5-small-dante"
+model_name="leobertolazzi/medieval-it5-small"
 
-st.header("danteIT5")
+st.header("medievalIT5")
 
 st_model_load = st.text('Loading style transfer model...')
 
@@ -21,10 +21,10 @@ tokenizer, model = load_model()
 
 st_model_load.text("")
 
-st.markdown('Questa è una piccola app fatta utilizzando un [modello T5 italiano](https://huggingface.co/gsarti/it5-small) al quale è stato fatto un fine-tuning su tutta la [*Divina Commedia*](https://it.wikipedia.org/wiki/Divina_Commedia) e le rispettive parafrasi in italiano moderno.')
-st.markdown("Con questa app puoi divertirti a convertire lo stile delle tue frasi dall'italiano moderno a quello dantesco!")
+st.markdown('Questa è una piccola app fatta utilizzando un [modello T5 italiano](https://huggingface.co/gsarti/it5-small) al quale è stato fatto un fine-tuning su testi in italiano medievale.')
+st.markdown("Con questa app puoi divertirti a convertire lo stile delle tue frasi dall'italiano moderno a quello medievale!")
 st.markdown('I risultati possono essere anche molto lontani dalla perfezione, ma puoi giocare con le  *Impostazioni* per provare ad ottenerne di migliori.')
-st.markdown('La repository del progetto è disponibile [qui](https://github.com/leobertolazzi/danteIT5).')
+st.markdown('La repository del progetto è disponibile [qui](https://github.com/leobertolazzi/medievalIT5).')
 st.markdown("P.s. se non sai cosa scrivere prova con il testo di una canzone.")
 
 with st.sidebar:
@@ -66,24 +66,24 @@ def transfer_style():
     if beams != 0 and top_p == 0.:
         outputs = model.generate(**inputs, max_length=128, do_sample=False, num_beams=beams, no_repeat_ngram_size=3)
         decoded_outputs = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-        predicted_dante = [nltk.sent_tokenize(decoded_output.strip())[0] for decoded_output in decoded_outputs]
+        predicted = [nltk.sent_tokenize(decoded_output.strip())[0] for decoded_output in decoded_outputs]
     elif top_p != 0. and beams == 0:
         outputs = model.generate(**inputs, max_length=128, do_sample=True, top_p=top_p)
         decoded_outputs = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-        predicted_dante = [nltk.sent_tokenize(decoded_output.strip())[0] for decoded_output in decoded_outputs]
+        predicted = [nltk.sent_tokenize(decoded_output.strip())[0] for decoded_output in decoded_outputs]
     else:
-        predicted_dante = []
+        predicted = []
 
-    st.session_state.dante = predicted_dante
+    st.session_state.medieval = predicted
 
 # generate title button
 st_generate_button = st.button('Trasferisci stile', on_click=transfer_style)
 
 # title generation labels
-if 'dante' not in st.session_state:
-    st.session_state.dante = []
+if 'medieval' not in st.session_state:
+    st.session_state.medieval = []
 
-if len(st.session_state.dante) > 0:
+if len(st.session_state.medieval) > 0:
     with st.container():
-        for sent in st.session_state.dante:
+        for sent in st.session_state.medieval:
             st.markdown("__"+ sent +"__")

@@ -6,8 +6,8 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, DataCollatorForSeq2Seq, Seq2SeqTrainingArguments, Seq2SeqTrainer
 import evaluate
 
-# ita2dante dataset class
-class Ita2Dante(torch.utils.data.Dataset):
+# Ita2Medieval dataset class
+class Ita2Medieval(torch.utils.data.Dataset):
     def __init__(self, encodings, labels):
         self.encodings = encodings
         self.labels = labels
@@ -54,9 +54,9 @@ if __name__ == "__main__":
         os.mkdir("model")
     
     # dataset with italian and dantean text
-    ita2dante_df = pd.read_csv('data/ita2dante.csv')
-    ita2dante_df = ita2dante_df.applymap(str)
-    train_df, test_df = train_test_split(ita2dante_df, test_size=0.05, random_state=36)
+    ita2medieval_df = pd.read_csv('data/ita2dante.csv')
+    ita2medieval_df = ita2medieval_df.applymap(str)
+    train_df, test_df = train_test_split(ita2medieval_df, test_size=0.05, random_state=36)
 
     # model name on the huggingface hub and tokenizer
     model_checkpoint = "gsarti/it5-small"
@@ -66,15 +66,15 @@ if __name__ == "__main__":
     train_encodings = tokenizer(train_df["italian"].to_list(), max_length=128, truncation=True)
     val_encodings = tokenizer(test_df["italian"].to_list(), max_length=128, truncation=True)
     with tokenizer.as_target_tokenizer():
-        train_labels = tokenizer(train_df["dante"].to_list(), max_length=128, truncation=True)
-        val_labels = tokenizer(test_df["dante"].to_list(), max_length=128, truncation=True)
+        train_labels = tokenizer(train_df["medieval"].to_list(), max_length=128, truncation=True)
+        val_labels = tokenizer(test_df["medieval"].to_list(), max_length=128, truncation=True)
 
-    # Ita2Dante
-    train_dataset = Ita2Dante(train_encodings, train_labels)
-    val_dataset = Ita2Dante(val_encodings, val_labels)
+    # Ita2Medieval
+    train_dataset = Ita2Medieval(train_encodings, train_labels)
+    val_dataset = Ita2Medieval(val_encodings, val_labels)
 
     # model name and saving directory
-    model_name = "dante-it5"
+    model_name = "medieval-it5"
     model_dir = "model"
 
     # Setup evaluation 

@@ -9,7 +9,7 @@ for rootdir, dirs, files in os.walk(rootdir):
         if 'checkpoint' in os.path.join(rootdir, subdir):
             model_dir = os.path.join(rootdir, subdir)
 
-st.header("danteIT5")
+st.header("medievalIT5")
 
 st_model_load = st.text('Loading style transfer model...')
 
@@ -25,18 +25,19 @@ def load_model():
 tokenizer, model = load_model()
 st_model_load.text("")
 
-st.markdown('This is a small app made with an [italian T5 model](https://huggingface.co/gsarti/it5-small) fine-tuned on the whole [*Divine Comedy*](https://en.wikipedia.org/wiki/Divine_Comedy) and its paraphrases in modern italian.')
-st.markdown('You can have fun converting the style of your italian text to the one of Dante!')
-st.markdown('The results may be far from perfect, but you can play with the *Generation settings* and try to obtain better results.')
-st.markdown('All code is open sourced and [here](https://github.com/leobertolazzi/danteIT5) you can find the project repo.')
+st.markdown('Questa è una piccola app fatta utilizzando un [modello T5 italiano](https://huggingface.co/gsarti/it5-small) al quale è stato fatto un fine-tuning su testi in italiano medievale..')
+st.markdown("Con questa app puoi divertirti a convertire lo stile delle tue frasi dall'italiano moderno a quello medievale!")
+st.markdown('I risultati possono essere anche molto lontani dalla perfezione, ma puoi giocare con le  *Impostazioni* per provare ad ottenerne di migliori.')
+st.markdown('La repository del progetto è disponibile [qui](https://github.com/leobertolazzi/medievalIT5).')
+st.markdown("P.s. se non sai cosa scrivere prova con il testo di una canzone.")
 
 with st.sidebar:
-    st.header("Generation settings")
+    st.header("Impostazioni")
     if 'num_titles' not in st.session_state:
         st.session_state.num_titles = 5
     def on_change_num_titles():
         st.session_state.num_titles = num_titles
-    num_titles = st.slider("Number of sentences to generate", min_value=1, max_value=10, value=1, step=1, on_change=on_change_num_titles)
+    num_titles = st.slider("Numero di frasi da generare", min_value=1, max_value=10, value=1, step=1, on_change=on_change_num_titles)
     if 'beams' not in st.session_state:
         st.session_state.beams = 6
     def on_change_beams():
@@ -48,13 +49,13 @@ with st.sidebar:
         st.session_state.top_p = top_p
     top_p = st.slider("Top-p", min_value=0., max_value=1.00, value=0., step=0.05, on_change=on_change_top_p)
 
-    st.markdown("Note: *Beams* and *Top-p* cannot be both set on non-zero values")
+    st.markdown("Nota: *Beams* e *Top-p* non possono avere entrambi valori diversi da zero")
 
-st.subheader("Text generation")
+st.subheader("Generazione del testo")
 
 if 'text' not in st.session_state:
     st.session_state.text = ""
-st_text_area = st.text_area('Input text', value=st.session_state.text, height=50)
+st_text_area = st.text_area('Testo di input', value=st.session_state.text, height=50)
 
 def transfer_style():
     st.session_state.text = st_text_area
@@ -69,24 +70,24 @@ def transfer_style():
     if beams != 0 and top_p == 0.:
         outputs = model.generate(**inputs, max_length=128, do_sample=False, num_beams=beams, no_repeat_ngram_size=3)
         decoded_outputs = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-        predicted_dante = [nltk.sent_tokenize(decoded_output.strip())[0] for decoded_output in decoded_outputs]
+        predicted = [nltk.sent_tokenize(decoded_output.strip())[0] for decoded_output in decoded_outputs]
     elif top_p != 0. and beams == 0:
         outputs = model.generate(**inputs, max_length=128, do_sample=True, top_p=top_p)
         decoded_outputs = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-        predicted_dante = [nltk.sent_tokenize(decoded_output.strip())[0] for decoded_output in decoded_outputs]
+        predicted = [nltk.sent_tokenize(decoded_output.strip())[0] for decoded_output in decoded_outputs]
     else:
-        predicted_dante = []
+        predicted = []
 
-    st.session_state.dante = predicted_dante
+    st.session_state.medieval = predicted
 
 # generate title button
-st_generate_button = st.button('Transfer style', on_click=transfer_style)
+st_generate_button = st.button('Trasferisci stile', on_click=transfer_style)
 
 # title generation labels
-if 'dante' not in st.session_state:
-    st.session_state.dante = []
+if 'medieval' not in st.session_state:
+    st.session_state.medieval = []
 
-if len(st.session_state.dante) > 0:
+if len(st.session_state.medieval) > 0:
     with st.container():
-        for sent in st.session_state.dante:
+        for sent in st.session_state.medieval:
             st.markdown("__"+ sent +"__")
