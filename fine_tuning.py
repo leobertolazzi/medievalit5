@@ -1,8 +1,10 @@
 import os 
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 import torch
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, DataCollatorForSeq2Seq, Seq2SeqTrainingArguments, Seq2SeqTrainer
+import evaluate
 
 # ita2dante dataset class
 class Ita2Dante(torch.utils.data.Dataset):
@@ -19,6 +21,30 @@ class Ita2Dante(torch.utils.data.Dataset):
 # get an untrained model
 def model_init():
     return AutoModelForSeq2SeqLM.from_pretrained(model_checkpoint)
+
+# basic postprocessing
+def postprocess_text(preds, labels):
+    preds = [pred.strip() for pred in preds]
+    labels = [[label.strip()] for label in labels]
+    return preds, labels
+
+# compute metric for evaluate best model
+def compute_metrics(eval_preds):
+    preds, labels = eval_preds
+    if isinstance(preds, tuple):
+        preds = preds[0]
+    decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
+    # replace -100 in the labels as we can't decode them.
+    labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
+    decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
+    # some simple post-processing
+    decoded_preds, decoded_labels = postprocess_text(decoded_preds, decoded_labels)
+    result = metric.compute(predictions=decoded_preds, references=decoded_labels)
+    result = {"bleu": result["bleu"]}
+    prediction_lens = [np.count_nonzero(pred != tokenizer.pad_token_id) for pred in preds]
+    result["gen_len"] = np.mean(prediction_lens)
+    result = {k: round(v, 4) for k, v in result.items()}
+    return result
 
 
 if __name__ == "__main__":
@@ -51,6 +77,9 @@ if __name__ == "__main__":
     model_name = "dante-it5"
     model_dir = "model"
 
+    # Setup evaluation 
+    metric = evaluate.load("bleu")
+
     # trainer arguments
     args = Seq2SeqTrainingArguments(
         model_dir,
@@ -61,12 +90,13 @@ if __name__ == "__main__":
         save_strategy="steps",
         save_steps=200,
         learning_rate=8e-4,
-        per_device_train_batch_size=16,
-        per_device_eval_batch_size=16,
+        per_device_train_batch_size=18,
+        per_device_eval_batch_size=18,
         save_total_limit=1,
         num_train_epochs=8,
         predict_with_generate=True,
-        fp16=False,
+        metric_for_best_model="eval_bleu",
+        fp16=False
     )
 
     # data collator
@@ -79,7 +109,8 @@ if __name__ == "__main__":
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         data_collator=data_collator,
-        tokenizer=tokenizer
+        tokenizer=tokenizer,
+        compute_metrics=compute_metrics
     )
 
     # start training
