@@ -54,7 +54,7 @@ if __name__ == "__main__":
         os.mkdir("model")
     
     # dataset with italian and dantean text
-    ita2medieval_df = pd.read_csv('data/ita2dante.csv')
+    ita2medieval_df = pd.read_csv('data/ita2medieval.csv')
     ita2medieval_df = ita2medieval_df.applymap(str)
     train_df, test_df = train_test_split(ita2medieval_df, test_size=0.05, random_state=36)
 
