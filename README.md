@@ -13,7 +13,7 @@ The app looks like this:
 To obtain better results, it is suggested to experiment with "Impostazioni". For simplicity, the only generation methods which can be used are *Beam search* and *Nucleus sampling*.
 
 ## Dataset
-The **ita2medieval** dataset contains sentences from medieval italian along with paraphrases in contemporary italian (approximately 6.5k pairs in total). The data is scraped from [letteritaliana.weebly.com/](https://letteritaliana.weebly.com/) and the texts are by Dante, Petrarca, Guinizelli and Cavalcanti. 
+The **ita2medieval** dataset contains sentences from medieval italian along with paraphrases in contemporary italian (approximately 6.5k pairs in total). The data is scraped from [letteritaliana.weebly.com](https://letteritaliana.weebly.com/) and the texts are by Dante, Petrarca, Guinizelli and Cavalcanti. 
 
 Here are the first three rows of the ita2medieval dataset:
 
