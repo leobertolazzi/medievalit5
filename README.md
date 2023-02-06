@@ -4,7 +4,7 @@ Text Style Transfer (TST) is a task in which the *source style* of a text is cha
 
 Here I show how to fine-tune an [italian T5 model](https://huggingface.co/gsarti/it5-small) to perform TST from modern italian to dantean italian using a custom dataset called **ita2dante**.
 
-The fine-tuned model can be tested using an online app made with [Streamlit](https://streamlit.io/), both in an [english version](https://leobertolazzi-danteit5-app-cloud-eng-8upuiq.streamlit.app/) and in a [italian version](https://leobertolazzi-danteit5-app-cloud-ita-c2olq1.streamlit.app/).
+The fine-tuned model can be tested using an online app made with [Streamlit](https://streamlit.io/). You can browse to the app [here](https://leobertolazzi-danteit5-app-cloud-eng-8upuiq.streamlit.app/) (english version) and [here](https://leobertolazzi-danteit5-app-cloud-ita-c2olq1.streamlit.app/) (italian version).
 
 The app looks like this:
 
@@ -45,7 +45,7 @@ $ streamlit run app_local.py
 ```
 
 ## Cloud app
-If you only want to try the model without fine-tuning it from scratch, you can browse to the cloud app [here (eng)](https://leobertolazzi-danteit5-app-cloud-eng-8upuiq.streamlit.app/) and [here (ita)](https://leobertolazzi-danteit5-app-cloud-ita-c2olq1.streamlit.app/). The cloud app uses an already fine-tuned model on the [Hugging Face Hub](https://huggingface.co/leobertolazzi/it5-small-dante).
+If you only want to try the model without fine-tuning it from scratch, you can browse to the cloud app [here (eng)](https://leobertolazzi-danteit5-app-cloud-eng-8upuiq.streamlit.app/) and [here (ita)](https://leobertolazzi-danteit5-app-cloud-ita-c2olq1.streamlit.app/). The cloud app uses the already fine-tuned model on the [Hugging Face Hub](https://huggingface.co/leobertolazzi/it5-small-dante).
 
 ## Limitations
 The biggest limitation for this project is the size of the ita2dante dataset. In fact, it consists only of 6K sentences whereas [gsarti/it5-small](https://huggingface.co/gsarti/it5-small) has more than 70M parameters.
