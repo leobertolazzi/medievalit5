@@ -8,7 +8,7 @@ The fine-tuned model can be tested using an [online app](https://leobertolazzi-m
 
 The app looks like this:
 
-![](image/app.png)
+![](image/img.png)
 
 To obtain better results, it is suggested to experiment with "Impostazioni". For simplicity, the only generation methods which can be used are *Beam search* and *Nucleus sampling*.
 
