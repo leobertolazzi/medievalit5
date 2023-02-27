@@ -25,7 +25,7 @@ def load_model():
 tokenizer, model = load_model()
 st_model_load.text("")
 
-st.markdown('Questa app utilizza un [modello T5 italiano](https://huggingface.co/gsarti/it5-small) al quale è stato fatto un fine-tuning su testi in italiano medievale.')
+st.markdown('Questa app utilizza un [modello T5 italiano](https://huggingface.co/gsarti/it5-base) al quale è stato fatto un fine-tuning su testi in italiano medievale.')
 st.markdown("Qui puoi divertirti a convertire lo stile delle tue frasi dall'italiano contemporaneo a quello medievale!")
 st.markdown('I risultati possono essere anche molto lontani dalla perfezione, ma puoi giocare con le  *Impostazioni* per provare ad ottenerne di migliori.')
 st.markdown('La repository del progetto è disponibile [qui](https://github.com/leobertolazzi/medievalIT5).')

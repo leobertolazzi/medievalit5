@@ -59,7 +59,7 @@ if __name__ == "__main__":
     train_df, test_df = train_test_split(ita2medieval_df, test_size=0.05, random_state=36)
 
     # model name on the huggingface hub and tokenizer
-    model_checkpoint = "gsarti/it5-small"
+    model_checkpoint = "gsarti/it5-base"
     tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
 
     # encode data
@@ -89,9 +89,9 @@ if __name__ == "__main__":
         logging_steps=100,
         save_strategy="steps",
         save_steps=200,
-        learning_rate=8e-4,
-        per_device_train_batch_size=18,
-        per_device_eval_batch_size=18,
+        learning_rate=5e-4,
+        per_device_train_batch_size=16,
+        per_device_eval_batch_size=16,
         save_total_limit=1,
         num_train_epochs=8,
         predict_with_generate=True,
