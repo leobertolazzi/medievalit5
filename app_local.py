@@ -42,14 +42,15 @@ with st.sidebar:
         st.session_state.beams = 6
     def on_change_beams():
         st.session_state.beams = beams
-    beams = st.slider("Beams", min_value=0, max_value=12, value=6, step=1, on_change=on_change_beams)
+    beams = st.slider("Beams", min_value=0, max_value=12, value=8, step=1, on_change=on_change_beams)
     if 'top_p' not in st.session_state:
         st.session_state.top_p = 0.
     def on_change_top_p():
         st.session_state.top_p = top_p
     top_p = st.slider("Top-p", min_value=0., max_value=1.00, value=0., step=0.05, on_change=on_change_top_p)
 
-    st.markdown("Nota: *Beams* e *Top-p* non possono avere entrambi valori diversi da zero")
+    st.markdown("Nota: *Beams* e *Top-p* non possono avere entrambi valori diversi da zero.")
+    st.markdown("Nota: se non sai quale valore di *Top-p* scegliere prova con 0.5.")
 
 st.subheader("Generazione del testo")
 
