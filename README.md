@@ -4,7 +4,7 @@ text-style-transfer is a task in which the *source style* of a text is changed t
 
 Here I show how to fine-tune an [italian T5 model](https://huggingface.co/gsarti/it5-base) to perform text-style-transfer from contemporary to medieval italian using a custom dataset called [ita2medieval](https://huggingface.co/datasets/leobertolazzi/ita2medieval).
 
-The fine-tuned model can be tested using an [online app](https://leobertolazzi-medievalit5-app-cloud-u22fu2.streamlit.app/) made with [Streamlit](https://streamlit.io/) (the app is in italian).
+The fine-tuned model can be tested using an [online app](https://leobertolazzi-medievalit5-app-cloud-a6p5an.streamlit.app/) made with [Streamlit](https://streamlit.io/) (the app is in italian).
 
 The app looks like this:
 
@@ -45,7 +45,7 @@ $ streamlit run app_local.py
 ```
 
 ## Cloud app
-If you only want to try the model without fine-tuning it from scratch, you can browse to the cloud app [here (ita)](https://leobertolazzi-medievalit5-app-cloud-u22fu2.streamlit.app/). The cloud app uses the already fine-tuned model on the [Hugging Face Hub](https://huggingface.co/leobertolazzi/medieval-it5-base).
+If you only want to try the model without fine-tuning it from scratch, you can browse to the cloud app [here (ita)](https://leobertolazzi-medievalit5-app-cloud-a6p5an.streamlit.app/). The cloud app uses the already fine-tuned model on the [Hugging Face Hub](https://huggingface.co/leobertolazzi/medieval-it5-base).
 
 ## Limitations
 The biggest limitation for this project is the size of the ita2dante dataset. In fact, it consists only of 6K sentences whereas [gsarti/it5-base](https://huggingface.co/gsarti/it5-base) has 220M parameters.
